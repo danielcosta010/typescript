@@ -9,7 +9,7 @@ export class NegociacaoController {
   private inputQuantidade: HTMLInputElement;
   private inputValor: HTMLInputElement;
   private negociacoes = new Negociacoes();
-  private negociacoesView = new NegociacoesView('#negociacoesView');
+  private negociacoesView = new NegociacoesView('#negociacoesView', true);
   private mensagemView = new MensagemView('#mensagemView');
   
 
@@ -21,6 +21,7 @@ export class NegociacaoController {
   }
 
   public adiciona(): void {
+    /* Comentário não pode aparecer no arquivo js */
     const negociacao = Negociacao.criaDe(
       this.inputData.value,
       this.inputQuantidade.value,
