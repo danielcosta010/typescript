@@ -22,6 +22,9 @@ export class NegociacaoController {
 
   public adiciona(): void {
     /* Comentário não pode aparecer no arquivo js */
+
+    const t1 = performance.now();
+
     const negociacao = Negociacao.criaDe(
       this.inputData.value,
       this.inputQuantidade.value,
@@ -35,6 +38,10 @@ export class NegociacaoController {
     this.negociacoes.adiciona(negociacao);
     this.atualizaView();
     this.limparFormulario();
+
+    const t2 = performance.now();
+    console.log(`Tempo de execução do método adiciona foi ${(t2 - t1) / 1000} segundos`);
+    
   }
   private ehDiaUtil(data: Date) {
     return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO;

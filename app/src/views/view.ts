@@ -15,13 +15,20 @@ export abstract class View<T> {
     }
   }
 
-  protected abstract template(model: T): string 
-
   public update(model: T): void {
+    const t1 = performance.now();
     let template = this.template(model);
     if(this.escapar) {
-      template = template.replace(/<script>[\s\S]*?<\/script>/, '')
+      template = template
+        .replace(/<script>[\s\S]*?<\/script>/, '')
     }
     this.elemento.innerHTML = template;
+    const t2 = performance.now();
+    console.log(`O tempo de execução do método update foi ${(t2 - t1) / 1000} segundos`);
+    
+    
   }
+  
+  protected abstract template(model: T): string
+  
 }
