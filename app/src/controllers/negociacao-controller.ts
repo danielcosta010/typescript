@@ -1,3 +1,4 @@
+import { logarTempoDeExecucao } from "../decorators/logarTempoDeExecucao.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
@@ -20,10 +21,9 @@ export class NegociacaoController {
     this.negociacoesView.update(this.negociacoes);
   }
 
+  @logarTempoDeExecucao()
   public adiciona(): void {
     /* Comentário não pode aparecer no arquivo js */
-
-    const t1 = performance.now();
 
     const negociacao = Negociacao.criaDe(
       this.inputData.value,
@@ -37,12 +37,9 @@ export class NegociacaoController {
     }
     this.negociacoes.adiciona(negociacao);
     this.atualizaView();
-    this.limparFormulario();
-
-    const t2 = performance.now();
-    console.log(`Tempo de execução do método adiciona foi ${(t2 - t1) / 1000} segundos`);
-    
+    this.limparFormulario();    
   }
+
   private ehDiaUtil(data: Date) {
     return data.getDay() > DiasDaSemana.DOMINGO && data.getDay() < DiasDaSemana.SABADO;
   }
